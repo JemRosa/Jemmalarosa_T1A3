@@ -27,16 +27,12 @@ def get_random_quote():
 
 
 def get_categories():
-    categories = set() #To avoid duplicate categories
     try:
-        with open("src/quote.txt", "r") as file:
-            for line in file:
-                quote_text, category = line.strip().split(" : ")
-                categories.add(category)
-                print(categories)
-                        
+        category = {'Motivation', 'Inspiration', 'Mindfulness', 'Positivity', 'Happiness'}
+        a, b, c, d, e = category
+        print(f"These are the categories avaliable: {a}, {b}, {c}, {d}, {e}.")          
     except (IOError, ValueError) as e:
-        print(f"An error occurred while generating random quote: {e}")
+        print(f"An error occurred while generating a quote: {e}")
         return None
     
 
@@ -55,10 +51,25 @@ def get_quote_from_preference(category):
                 quote_text, category = random_line.strip().split(" : ")
                 print(quote_text)
             else:
-                print(f"No quotes found for category: {category}")
+                print("Sorry, that is not an avalaible category! Please check the spelling is correct or enter an avaliable category!")
     except IOError as e:
         print(f"An error occurred while generating random quote: {e}")
         return None
     
-get_quote_from_preference('Happiness')
-get_categories()
+def display_quote():
+    try:
+        categories = get_categories()
+        print("Choose an avaliable category to recieve a quote, or we can surprise you!")
+        preference = input("Enter 'category' or 'surprise' to get a quote:  ").strip().capitalize()
+
+        if preference == "Surprise" :
+            get_random_quote()
+        elif preference == "Motivation" or "Inspiration" or "Mindfulness" or "Positivity" or "Happiness":
+            get_quote_from_preference(preference)
+        else:
+            print(f"{preference} is not an avaliable category. Please choose a category from the list or type 'suprise' for a random quote")
+    
+    except Exception as e:
+        print(f"An error occurred : {e}")
+
+
