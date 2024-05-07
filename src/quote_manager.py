@@ -99,12 +99,33 @@ def add_my_own_quote():
     try:
         quote_text = input("Enter your quote here:  ").strip()
         category = input("Enter a category for the quote:  ").strip().capitalize()
+        # Checking if the category the user entered already exists
+        with open("src/quote.txt", "r") as file:
+            lines = file.readlines()
+            categories = {line.strip().split(" : ")[1] for line in lines}
+        # If entered category does not exist 
+        if category not in categories:
+            print(f"The category you have entered '{category}', does not exist.")
+            # Ask the user for input to create a new category
+            confirm = input("Do you want to create a new category? 'Yes' or 'No' : ").strip().capitalize()
+            if confirm == "Yes":
+                # Create and append new category to the list of categories 
+                categories.add(category)
+                with open("src/quote.txt", "a") as file:
+                    file.write(f"\n: {category}\n")
+            elif confirm == "No":
+                print("Category creation CANCELLED. New quote has NOT been added.")
+                return
+            else:
+                print("Invalid option! Make sure to enter an avaliable option 'Yes' or 'No'.")
+
+        # If category entered already exists, add quote to file
         # Open the txt file (quote.txt) in append mode and add the new quote into it
         with open("src/quote.txt", "a") as file:
-            file.write(f"{quote_text} : {category}\n")
+                file.write(f"{quote_text} : {category}\n")
         print("Your quote has been added!")
     except Exception as e:
-     print(f"An error occurred : {e} Please double check input is correct, and try again!")
+        print(f"An error occurred : {e} Please double check input is correct, and try again!")
         
 def remove_quote():
     try:
@@ -159,4 +180,35 @@ def edit_quote():
     except Exception as e:
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
-edit_quote()
+def search_quotes():
+    try:
+        while True:
+            print("Search for a quote by entering 'keywords'")
+            search_keywords = input("Enter keywords : ").strip().lower().split()
+            # Open the txt file (quote.txt) file and read all lines
+            with open("src/quote.txt", "r") as file:
+                lines = file.readlines()
+            # Create a list to store matched quotes
+            matched_quotes = []
+            # Iterate through each line to check for any matches
+            for line in lines:
+                quote_text = line.strip().split(" : ")[0] # Make sure quote 'text' only not 'category'
+                if all(keyword in quote_text.lower() for keyword in search_keywords):
+                    matched_quotes.append(quote_text)
+            # Display any quotes that have matched to keyowrds searched by user
+            if matched_quotes:
+                print("Here are the quotes with matching keywords : ")
+                for quote in matched_quotes:
+                    print(quote)
+            else:
+                print("Sorry, we cannot find any quotes matching the keywords you entered!")
+            # Allowing the user to search again 
+            choice = input("Would you like to search again? 'Yes' or 'No' : ").strip().capitalize()
+            if choice == "No":
+                break
+    except Exception as e:
+        print(f"An error occurred : {e} Please double check input is correct, and try again!")
+
+
+
+add_my_own_quote()
