@@ -68,8 +68,95 @@ def display_quote():
             get_quote_from_preference(preference)
         else:
             print(f"{preference} is not an avaliable category. Please choose a category from the list or type 'suprise' for a random quote")
-    
     except Exception as e:
         print(f"An error occurred : {e}")
 
+def print_all_from_category():
+    try:
+        # Prints all the quote categories avliable
+        print("Print all quotes in category")
+        get_categories()
+        # Prompt for user to input a category
+        category = input("Please enter a category to display all quotes: ").strip().capitalize()
+        # Open the txt file (quotes.txt) in read mode to read all existing lines (quotes)
+        with open("src/quote.txt", "r") as file:
+            lines = file.readlines()
+        # Searching quotes line by line to the specified category
+        category_quotes = [line.strip() for line in lines if line.strip().endswith(f" : {category}")]
+        # Printing all the quotes under the specified category
+        if category_quotes:
+            print(f"All quotes under the category : {category} : ")
+            for quote in category_quotes:
+                print(quote.split(" : ")[0])
+        # Message to catch an error of invalid category
+        else:
+            print(f"No quotes under the category : {category} : ")
+    except Exception as e:
+        print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
+
+def add_my_own_quote():
+    try:
+        quote_text = input("Enter your quote here:  ").strip()
+        category = input("Enter a category for the quote:  ").strip().capitalize()
+        # Open the txt file (quote.txt) in append mode and add the new quote into it
+        with open("src/quote.txt", "a") as file:
+            file.write(f"{quote_text} : {category}\n")
+        print("Your quote has been added!")
+    except Exception as e:
+     print(f"An error occurred : {e} Please double check input is correct, and try again!")
+        
+def remove_quote():
+    try:
+        # Ask the user input the quote they want to remove
+        quote_text = input("Enter the quote you would like to remove:  ").strip().capitalize()
+        # Open the txt file (quotes.txt) in read more to read all existing lines (quotes)
+        with open("src/quote.txt", "r") as file:
+            lines = file.readlines()
+        # Filter (find) the quote to be removed
+        filtered_lines = [line for line in lines if line.strip().split(" : ")[0].capitalize() != quote_text]
+        # Confirming that the quote has been removed
+        if len(lines) ==len(filtered_lines):
+            print("Sorry, the entered quote does not exist! Please double check you entered an existing quote!")
+        # Remaining quotes back to the text file (quotes.txt)
+        else:
+            with open("src/quote.txt", "w") as file:
+                file.writelines(filtered_lines)
+                print("Your quote has been removed!")
+    except Exception as e:
+        print(f"An error occurred while removing quote : {e} Please double check input is correct, and try again!")
+
+def edit_quote():
+    try:
+        print("Edit Quote Options")
+        print("Would you like to add or remove a quote?")
+        choice = input("Please enter 'Add' or 'Remove' :   ").strip().capitalize()
+
+        if choice == "Add":
+            add_my_own_quote()
+        elif choice == "Remove":
+            print("Do you know what quote you want to remove?")
+            decision = input("Enter 'Yes' or 'No' : ").strip().capitalize()
+            if decision == "Yes":
+                remove_quote()
+            elif decision == "No":
+                print("Would you like to view all quotes from a category to help you decide?")
+                decide = input("Enter 'Yes' or 'No' : ").strip().capitalize()
+                if decide == "Yes":
+                    print_all_from_category()
+                    print("Would you like to remove a quote?")
+                    decide = input("Enter 'Yes' or 'No' : ").strip().capitalize()
+                    if decide == "Yes":
+                        remove_quote()
+                    elif decide == "No":
+                        print("Have a think about it and come back!")
+                elif decide == "No":
+                    print("Have a think about it and come back!")
+                else:
+                    print("Invalid input! Try again and choose from the avaliable options!")
+        else:
+            print(f"{choice} is invlaid. Please try again and choose from the avaliable options!")
+    except Exception as e:
+        print(f"An error occurred : {e} Please double check input is correct, and try again!")
+
+edit_quote()
