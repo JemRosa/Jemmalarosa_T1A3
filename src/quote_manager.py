@@ -1,5 +1,6 @@
 """
-  imorting random
+  This module contains main functions that relate to the Moticational Application. It defines fuctions that allow the user to interact with, 
+  add, remove and earch for motivaitnal quotes from a file named 'quote.txt' loacted in the src directory.
 """
 import random
 
@@ -7,10 +8,12 @@ import random
 file = open("src/quote.txt", "r")
 
 
-"""defining function to generate random quote
-"""
+
 # Defining method to generate random quote
 def get_random_quote():
+    """
+    Defining function to generate random quote
+    """
     try:
         with open("src/quote.txt", "r") as file:
            # Opening txt file (quotes.txt) and reading lines
@@ -27,6 +30,9 @@ def get_random_quote():
 
 
 def get_categories():
+    """
+    Defining function to output the subject categories avaliable to the user
+    """
     try:
         category = {'Motivation', 'Inspiration', 'Mindfulness', 'Positivity', 'Happiness'}
         a, b, c, d, e = category
@@ -211,4 +217,4 @@ def search_quotes():
 
 
 
-add_my_own_quote()
+search_quotes()
