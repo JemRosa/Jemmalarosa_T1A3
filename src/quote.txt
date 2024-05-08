@@ -15,7 +15,7 @@ Wherever you are, be there totally - Eckhart Tolle : Mindfulness
 The present moment is the only moment available to us, and it is the door to all moments - Thich Nhat Hanh : Mindfulness
 Mindfulness is the aware, balanced acceptance of the present experience - Sylvia Boorstein : Mindfulness
 Be present in all things and thankful for all things - Maya Angelou : Mindfulness
-Keep your face always toward the sunshine - and shadows will fall behind you : Walt Whitman : Positivity
+Keep your face always toward the sunshine - and shadows will fall behind you - Walt Whitman : Positivity
 You are capable of more than you know. : Positivity
 Every day is a second chance. : Positivity
 Your attitude determines your direction. : Positivity
@@ -28,5 +28,3 @@ The purpose of our lives is to be happy - Dalai Lama : Happiness
 Count your age by friends, not years. Count your life by smiles, not tears - John Lennon : Happiness
 The most important thing is to enjoy your life, to be happy, it's all that matters - Audrey Hepburn : Happiness
 Positivity is a mindset! : Positivity
-
-: Test

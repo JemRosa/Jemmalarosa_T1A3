@@ -31,12 +31,20 @@ def get_random_quote():
 
 def get_categories():
     """
-    Defining function to output the subject categories avaliable to the user
+    Defining function to output the unqiue subject categories from the quote.txt file to the user
     """
     try:
-        category = {'Motivation', 'Inspiration', 'Mindfulness', 'Positivity', 'Happiness'}
-        a, b, c, d, e = category
-        print(f"These are the categories avaliable: {a}, {b}, {c}, {d}, {e}.")          
+        categories = set() # Creating an empty set to store unquie categories
+        with open("src/quote.txt", "r") as file:
+            lines = file.readlines()
+        # Collecting categories from each line and adding them to the set
+        for line in lines:
+            category = line.strip().split(" : ")[1].capitalize()
+            categories.add(category) # Adds category to set
+        # Print all 'unique' categories
+        print("These are the categories avaliable :")
+        for category in categories:
+            print(category)
     except (IOError, ValueError) as e:
         print(f"An error occurred while generating a quote: {e}")
         return None
@@ -100,11 +108,66 @@ def print_all_from_category():
     except Exception as e:
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
+def remove_category():
+    """
+    A function to remove categories only created by user
+    """
+    try:
+        base_categories = {"Motivation", "Inspiration", "Mindfulness", "Positivity", "Happiness"}
+        print("Please note - YOU CAN ONLY REMOVE CATEGORIES YOU HAVE CREATED AND ONCE REMOVED CANNOT BE UNDONE")
+        choice = input("Would you still like to remove a category? 'Yes' or 'No' : ").strip().capitalize()
+        if choice == "Yes":
+            get_categories()
+            category_choice = input("Please enter a category to be removed : ").strip().capitalize()
+            with open("src/quote.txt", "r") as file:
+                lines = file.readlines()
+                if category_choice.capitalize() not in base_categories:
+                    update_lines = [line for line in lines if not line.strip().endswith(f": {category_choice}")]
+                    with open("src/quote.txt", "w") as file:
+                        file.writelines(update_lines)
+                        print(f"The category '{category_choice}' has been removed!")
+                else:
+                    print(f"The category '{category_choice}' is a base category and cannot be removed!")
+        elif choice == "No":
+            print("Have a think about it and come back!")
+            return
+        else:
+            print("Invalid option! Make sure to enter an avaliable option 'Yes' or 'No'.")
+    except Exception as e:
+        print(f"An error occurred : {e} Please double check input is correct, and try again!")
+
+
+def edit_categories():
+    """ a function to edit categories of quotes
+    """
+    try:
+        print("VIEW existing categories or EDIT 'add/remove' category")
+        print("Would you like to VIEW all categories? or EDIT a category")
+        choice = input("Please enter 'View' or 'Edit' : ").strip().capitalize()
+        if choice == "View":
+            get_categories()
+        elif choice == "Edit":
+            print("Would you like to ADD a new category or REMOVE an existing category?")
+            choice = input("Please enter 'Add' or 'Remove' : ").strip().capitalize()
+            if choice == "Add":
+                new_category = input("Please enter the name of the new category: ").strip().capitalize()
+                with open("src/quote.txt", "a") as file:
+                    file.write(f"\n: {category}\n")
+                    print(f"The category '{category}' has been added!")
+            elif choice == "Remove":
+                remove_category()
+            else:
+                print("Invalid option! Make sure to enter an avaliable option 'Add' or 'Remove'.")
+        else:
+            print("Invalid option! Make sure to enter an avaliable option 'View' or 'Edit'.")
+    except Exception as e:
+        print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
 def add_my_own_quote():
     try:
-        quote_text = input("Enter your quote here:  ").strip()
-        category = input("Enter a category for the quote:  ").strip().capitalize()
+        print("Create a new quote below!")
+        quote_text = input("Enter your quote here: ").strip().capitalize()
+        category = input("Enter a category for the quote: ").strip().capitalize()
         # Checking if the category the user entered already exists
         with open("src/quote.txt", "r") as file:
             lines = file.readlines()
@@ -118,7 +181,7 @@ def add_my_own_quote():
                 # Create and append new category to the list of categories 
                 categories.add(category)
                 with open("src/quote.txt", "a") as file:
-                    file.write(f"\n: {category}\n")
+                    file.write(f"\n{quote_text} : {category}\n")
             elif confirm == "No":
                 print("Category creation CANCELLED. New quote has NOT been added.")
                 return
@@ -215,6 +278,4 @@ def search_quotes():
     except Exception as e:
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
-
-
-search_quotes()
+remove_category()
