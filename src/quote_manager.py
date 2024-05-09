@@ -28,35 +28,14 @@ def get_random_quote():
         print(f"An error occurred while generating random quote: {e}")
         return None
 
-
-def get_categories():
-    """
-    Defining function to output the unqiue subject categories from the quote.txt file to the user
-    """
-    try:
-        categories = set() # Creating an empty set to store unquie categories
-        with open("src/quote.txt", "r") as file:
-            lines = file.readlines()
-        # Collecting categories from each line and adding them to the set
-        for line in lines:
-            category = line.strip().split(" : ")[1].capitalize()
-            categories.add(category) # Adds category to set
-        # Print all 'unique' categories
-        print("These are the categories avaliable :")
-        for category in categories:
-            print(category)
-    except (IOError, ValueError) as e:
-        print(f"An error occurred while generating a quote: {e}")
-        return None
-    
-
 def get_quote_from_preference(category):
+    category = category.strip().capitalize() 
     try:
         with open("src/quote.txt", "r") as file:
             # Opening txt file (quotes.txt) and reading lines (quotes)
             lines = file.readlines()
             # Filter lines (quotes) to find those that match specified category (preference)
-            filter_lines = [line for line in lines if line.strip().endswith(f" : {category}")]
+            filter_lines = [line for line in lines if line.strip().split (" : ")[1].capitalize() == category]
             # Making sure filter_lines returns correctly
             if filter_lines:
                 # Using random to generate a random quote from filter list
@@ -74,14 +53,14 @@ def display_quote():
     try:
         categories = get_categories()
         print("Choose an avaliable category to recieve a quote, or we can surprise you!")
-        preference = input("Enter 'category' or 'surprise' to get a quote:  ").strip().capitalize()
+        preference = input("Enter 'Category' or 'Surprise' to get a quote:  ").strip().capitalize()
 
         if preference == "Surprise" :
             get_random_quote()
-        elif preference == "Motivation" or "Inspiration" or "Mindfulness" or "Positivity" or "Happiness":
-            get_quote_from_preference(preference)
         else:
-            print(f"{preference} is not an avaliable category. Please choose a category from the list or type 'suprise' for a random quote")
+            get_quote_from_preference(preference)
+        #else:
+          #  print(f"{preference} is not an avaliable category. Please choose a category from the list or type 'suprise' for a random quote")
     except Exception as e:
         print(f"An error occurred : {e}")
 
@@ -136,13 +115,44 @@ def remove_category():
     except Exception as e:
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
+def get_categories():
+    """
+    Defining function to output the unqiue subject categories from the quote.txt file to the user while distinguishing between
+    'base' and user added categories
+    """
+    base_categories = {"Happiness", "Inspiration", "Mindfulness", "Motivation", "Positivity"}
+    user_categories = set() # Creating an empty set to store unique user added categories
+    try:
+        with open("src/quote.txt", "r") as file:
+            lines = file.readlines()
+        # Collecting categories from each line and adding them to correct the set
+        for line in lines:
+            seperate = line.strip().split(" : ")
+            if len(seperate) == 2:
+                category = seperate[1].capitalize()
+                if category not in base_categories:
+                    user_categories.add(category)
+            
+        # Print all 'base' categories and user added categories
+        print("Quote Categories :")
+        for category in base_categories:
+            print(category)
+
+        for category in user_categories:
+            if category in user_categories:
+                print("Quote Categories You Created! : ")
+                print(category)
+            
+    except (IOError, ValueError) as e:
+        print(f"An error occurred while generating a quote: {e}")
+    
 
 def edit_categories():
     """ a function to edit categories of quotes
     """
     try:
-        print("VIEW existing categories or EDIT 'add/remove' category")
-        print("Would you like to VIEW all categories? or EDIT a category")
+        print("You can VIEW existing categories or EDIT 'add/remove' categories!")
+        print("Would you like to : VIEW categories? or EDIT categories?")
         choice = input("Please enter 'View' or 'Edit' : ").strip().capitalize()
         if choice == "View":
             get_categories()
@@ -150,9 +160,10 @@ def edit_categories():
             print("Would you like to ADD a new category or REMOVE an existing category?")
             choice = input("Please enter 'Add' or 'Remove' : ").strip().capitalize()
             if choice == "Add":
-                new_category = input("Please enter the name of the new category: ").strip().capitalize()
+                category = input("Please enter the name of the new category: ").strip().capitalize()
+                quote_text = ("You can do it!").strip()
                 with open("src/quote.txt", "a") as file:
-                    file.write(f"\n: {category}\n")
+                    file.write(f"\n{quote_text} : {category}")
                     print(f"The category '{category}' has been added!")
             elif choice == "Remove":
                 remove_category()
@@ -278,4 +289,4 @@ def search_quotes():
     except Exception as e:
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
-remove_category()
+display_quote()
