@@ -30,10 +30,26 @@ def menu():
                     
             elif choice == "2":
                 quote_manager.get_categories()
-                preference = input("Please enter a category: ").strip().capitalize
+                preference = input("Please enter a category: ").capitalize()
                 quote_manager.get_quote_from_preference(preference)
+                print("Want to choose another category? or head back to the Menu!")
+                option = input("Enter 'Another' or 'Menu' : ")
+                while option == "Another":
+                    quote_manager.get_categories()
+                    preference = input("Please enter a category: ").capitalize()
+                    quote_manager.get_quote_from_preference(preference)
+                    print("Want to choose another category? or head back to the Menu!")
+                    option = input("Enter 'Another' or 'Menu' : ")
+
             elif choice == "3":
                 quote_manager.add_my_own_quote()
+                print("Want to add another quote? or head back to the Menu!")
+                option = input("Enter 'Add' or 'Menu' : ")
+                while option == "Add":
+                    quote_manager.add_my_own_quote()
+                    print("Want to add another quote? or head back to the Menu!")
+                    option = input("Enter 'Add' or 'Menu' : ")
+
             elif choice == "4":
                 quote_manager.search_quotes()
             elif choice == "5":
