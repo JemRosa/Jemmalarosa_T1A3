@@ -59,8 +59,7 @@ def display_quote():
             get_random_quote()
         else:
             get_quote_from_preference(preference)
-        #else:
-          #  print(f"{preference} is not an avaliable category. Please choose a category from the list or type 'suprise' for a random quote")
+       
     except Exception as e:
         print(f"An error occurred : {e}")
 
@@ -289,4 +288,4 @@ def search_quotes():
     except Exception as e:
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
-display_quote()
+
