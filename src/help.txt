@@ -12,9 +12,9 @@ This application is designed to help you boost your mood, motivation, and overal
 
 5. Category Options: View all existing categories, create new ones, or remove existing ones.
 
-6. Exit: Close the Mindset Application.
+6. Help: View this help message for a quick guide on how to use the application.
 
-7. Help: View this help message for a quick guide on how to use the application.
+7. Exit: Close the Mindset Application.
 
 Feel free to explore the various features of the application and let it inspire you on your journey towards a positive mindset!
 

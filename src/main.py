@@ -8,16 +8,8 @@ def menu():
     """
     try: 
         while True:
-            print("Welcome to the Mindest Application")
-            print("1. Surprise me with a random quote")
-            print("2. Boost your moode, get a quote based on your need!")
-            print("3. Quote Options (Create or Remove Quotes)")
-            print("4. Search Quotes")
-            print("5. Category Options (View all, Create or Remove)")
-            print("6. Exit")
-            print("7. Help")
+            quote_manager.menu_options()
             choice = int(input("Please Choose a Number :  "))
-    
             if choice == 1:
                 while True:
                     quote_manager.get_random_quote()
@@ -26,7 +18,7 @@ def menu():
                         menu()
                     elif option != "Surprise":
                        print("Invalid input! Please try again and choose from the avaliable options!")
-            if choice == 2:
+            elif choice == 2:
                 while True:
                     quote_manager.display_quote()
                     option = input("Enter 'Menu' to go back or 'Another' to get another quote : ").strip().capitalize()
@@ -34,7 +26,7 @@ def menu():
                         menu()
                     elif option != "Another":
                         print("Invalid input! Please try again and choose from the avaliable options!")
-            if choice == 3:
+            elif choice == 3:
                 while True:
                     quote_manager.edit_quote()
                     option = input("Enter 'Menu' to go back or 'Edit' to see quote options again : ").strip().capitalize()
@@ -42,7 +34,7 @@ def menu():
                         menu()
                     elif option != "Edit":
                         print("Invalid input! Please try again and choose from the avaliable options!")
-            if choice == 4:
+            elif choice == 4:
                 while True:
                     quote_manager.search_quotes()
                     option = input("Enter 'Menu' to go back or 'Search' to search again : ").strip().capitalize()
@@ -50,18 +42,21 @@ def menu():
                         menu()
                     elif option != "Search":
                         print("Invalid input! Please try again and choose from the avaliable options!")
-            if choice == 5:
-                quote_manager.edit_categories()
-                option = input("Enter 'Menu' to go back or 'Options' to see category options again : ").strip().capitalize()
-                if option == "Menu":
-                    menu()
-                elif option != "Options":
-                    print("Invalid input! Please try again and choose from the avaliable options!")
-            if choice == 6:
+            elif choice == 5:
+                while True:
+                    quote_manager.edit_categories()
+                    option = input("Enter 'Menu' to go back or 'Options' to see category options again : ").strip().capitalize()
+                    if option == "Menu":
+                        menu()
+                    elif option != "Options":
+                        print("Invalid input! Please try again and choose from the avaliable options!")
+            elif choice == 6:
+                while True:
+                    quote_manager.display_help()
+                    input("Press enter to return to the main menu...")
+            elif choice == 7:
                 print("Thank you for using the Mindest Application!")
-                break
-            if choice == 7:
-                quote_manager.display_help()
+                return False
             else:
                 print(f"{choice} is invlaid. Please try again and choose from the avaliable options!")
     except Exception as e:

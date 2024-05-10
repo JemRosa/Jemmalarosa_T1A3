@@ -4,11 +4,6 @@
 """
 import random
 
-# Opening tquote.txt and saving it into file variable
-file = open("src/quote.txt", "r")
-
-
-
 # Defining method to generate random quote
 def get_random_quote():
     """
@@ -29,13 +24,13 @@ def get_random_quote():
         return None
 
 def get_quote_from_preference(category):
-    category = category.strip().capitalize() 
+    category = category.strip().capitalize()
     try:
         with open("src/quote.txt", "r") as file:
             # Opening txt file (quotes.txt) and reading lines (quotes)
             lines = file.readlines()
             # Filter lines (quotes) to find those that match specified category (preference)
-            filter_lines = [line for line in lines if line.strip().split (" : ")[1].capitalize() == category]
+            filter_lines = [line for line in lines if len(line.strip().split(" : ")) == 2 and line.strip().split(" : ")[1].capitalize() == category]
             # Making sure filter_lines returns correctly
             if filter_lines:
                 # Using random to generate a random quote from filter list
@@ -296,4 +291,13 @@ def display_help():
     except FileNotFoundError:
         print("Error: Help file not found.")
 
-display_help()
+def menu_options():
+     print("Welcome to the Mindest Application")
+     print("1. Surprise me with a random quote")
+     print("2. Boost your moode, get a quote based on your need!")
+     print("3. Quote Options (Create or Remove Quotes)")
+     print("4. Search Quotes")
+     print("5. Category Options (View all, Create or Remove)")
+     print("6. Help")
+     print("7. Exit")
+
