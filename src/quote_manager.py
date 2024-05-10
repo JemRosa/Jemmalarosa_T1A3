@@ -1,6 +1,6 @@
 """
-  This module contains main functions that relate to the Moticational Application. It defines fuctions that allow the user to interact with, 
-  add, remove and earch for motivaitnal quotes from a file named 'quote.txt' loacted in the src directory.
+  This module contains main functions that relate to the Moticational Application. It defines functions that allow the user to interact with, 
+  add, remove and search for quotes from a file named 'quote.txt' located in the src directory.
 """
 import random
 
