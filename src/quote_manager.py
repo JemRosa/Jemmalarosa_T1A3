@@ -157,7 +157,7 @@ def edit_categories():
                 category = input("Please enter the name of the new category: ").strip().capitalize()
                 quote_text = ("You can do it!").strip()
                 with open("src/quote.txt", "a") as file:
-                    file.write(f"\n{quote_text} : {category}")
+                    file.write(f"\n{quote_text} : {category}\n")
                     print(f"The category '{category}' has been added!")
             elif choice == "Remove":
                 remove_category()
@@ -169,6 +169,8 @@ def edit_categories():
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
 def add_my_own_quote():
+    """_summary_
+    """
     try:
         print("Create a new quote below!")
         quote_text = input("Enter your quote here: ").strip().capitalize()
@@ -176,31 +178,27 @@ def add_my_own_quote():
         # Checking if the category the user entered already exists
         with open("src/quote.txt", "r") as file:
             lines = file.readlines()
-            categories = {line.strip().split(" : ")[1] for line in lines}
-        # If entered category does not exist 
+            categories = {line.strip().split(" : ")[1] for line in lines if line.strip()}
         if category not in categories:
             print(f"The category you have entered '{category}', does not exist.")
             # Ask the user for input to create a new category
             confirm = input("Do you want to create a new category? 'Yes' or 'No' : ").strip().capitalize()
             if confirm == "Yes":
-                # Create and append new category to the list of categories 
                 categories.add(category)
                 with open("src/quote.txt", "a") as file:
                     file.write(f"\n{quote_text} : {category}\n")
+                    print(f"The category '{category}' has been added!")
             elif confirm == "No":
                 print("Category creation CANCELLED. New quote has NOT been added.")
-                return
-            else:
-                print("Invalid option! Make sure to enter an avaliable option 'Yes' or 'No'.")
-
-        # If category entered already exists, add quote to file
-        # Open the txt file (quote.txt) in append mode and add the new quote into it
-        with open("src/quote.txt", "a") as file:
+        else:
+             # If category entered already exists, add quote to file
+             # Open the txt file (quote.txt) in append mode and add the new quote into it
+            with open("src/quote.txt", "a") as file:
                 file.write(f"{quote_text} : {category}\n")
-        print("Your quote has been added!")
+                print("Your quote has been added!")
     except Exception as e:
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
-        
+
 def remove_quote():
     try:
         # Ask the user input the quote they want to remove
@@ -294,10 +292,9 @@ def display_help():
 def menu_options():
      print("Welcome to the Mindest Application")
      print("1. Surprise me with a random quote")
-     print("2. Boost your moode, get a quote based on your need!")
+     print("2. Boost your mood, get a quote based on your need!")
      print("3. Quote Options (Create or Remove Quotes)")
      print("4. Search Quotes")
      print("5. Category Options (View all, Create or Remove)")
      print("6. Help")
      print("7. Exit")
-
