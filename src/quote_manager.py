@@ -2,7 +2,7 @@
   This module contains main functions that relate to the Moticational Application. It defines functions that allow the user to interact with, 
   add, remove and search for quotes from a file named 'quote.txt' located in the src directory.
 """
-import random
+from random import choice
 
 # Defining method to generate random quote
 def get_random_quote():
@@ -14,7 +14,7 @@ def get_random_quote():
            # Opening txt file (quotes.txt) and reading lines
             lines = file.readlines()
            # Using random to generate random quote (line) and saving it into random line variable
-            random_line = random.choice(lines)
+            random_line = choice(lines)
            # printing random quote
             quote_text, category = random_line.strip().split(" : ")
             print(quote_text)
@@ -34,7 +34,7 @@ def get_quote_from_preference(category):
             # Making sure filter_lines returns correctly
             if filter_lines:
                 # Using random to generate a random quote from filter list
-                random_line = random.choice(filter_lines)
+                random_line = choice(filter_lines)
                 # Printing the quote from filter lines list (category)
                 quote_text, category = random_line.strip().split(" : ")
                 print(quote_text)
