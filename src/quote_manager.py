@@ -288,4 +288,12 @@ def search_quotes():
     except Exception as e:
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
+def display_help():
+    try:
+        with open("src/help.txt", "r") as file:
+            help_text = file.read()
+            print(help_text)
+    except FileNotFoundError:
+        print("Error: Help file not found.")
 
+display_help()

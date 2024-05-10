@@ -61,7 +61,7 @@ def menu():
                 print("Thank you for using the Mindest Application!")
                 break
             if choice == 7:
-                print("HELP")
+                quote_manager.display_help()
             else:
                 print(f"{choice} is invlaid. Please try again and choose from the avaliable options!")
     except Exception as e:

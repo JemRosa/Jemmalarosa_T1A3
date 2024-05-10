@@ -1,0 +1,23 @@
+Welcome to the Mindset Application!
+
+This application is designed to help you boost your mood, motivation, and overall mindset by providing you with inspiring and motivational quotes. Here's a quick overview of what you can do:
+
+1. Surprise me with a random quote: Get a random quote to uplift your spirits.
+
+2. Boost your mood: Get a quote based on your specific need or category preference.
+
+3. Quote Options: Create your own quotes, remove existing ones, or edit quotes.
+
+4. Search Quotes: Find quotes containing specific keywords or phrases.
+
+5. Category Options: View all existing categories, create new ones, or remove existing ones.
+
+6. Exit: Close the Mindset Application.
+
+7. Help: View this help message for a quick guide on how to use the application.
+
+Feel free to explore the various features of the application and let it inspire you on your journey towards a positive mindset!
+
+If you have any questions or encounter any issues, please don't hesitate to reach out for assistance.
+
+Enjoy the Mindset Application!
