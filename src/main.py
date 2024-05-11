@@ -7,6 +7,7 @@
 """
 import quote_manager
 
+
 def menu():
     """
     Main Menu for the Mindset Application.
@@ -24,13 +25,13 @@ def menu():
         Exception: If an error occurs during the execution of the menu options.
     """
     running = True
-    try: 
+    try:
         while running:
             # Display the 'Menu' options.
             quote_manager.menu_options()
             # Prompting the user to choose an option.
-            choice = int(input("Please Choose a Number :  "))
-            if choice == 1:
+            user_choice = int(input("Please Choose a Number :  "))
+            if user_choice == 1:
                 # Displaying random quotes until the user chooses to return to the 'Menu'.
                 while True:
                     quote_manager.get_random_quote()
@@ -39,14 +40,14 @@ def menu():
                         print("Invalid Option, please enter valid input!")
                     elif option == "Menu":
                         break
-            elif choice == 2:
+            elif user_choice == 2:
                 # Displaying quotes based on user preference until the user chooses to return to the 'Menu'.
                 while True:
                     quote_manager.display_quote()
                     option = input("Enter 'Menu' to go back or 'Another' to get another quote : ").strip().capitalize()
                     if option == "Menu":
                         break
-            elif choice == 3:
+            elif user_choice == 3:
                 # Allowing users to edit quotes until the user chooses to return to the 'Menu'.
                 while True:
                     quote_manager.edit_quote()
@@ -55,7 +56,7 @@ def menu():
                         break
                     elif option != "Edit":
                         print("Invalid input! Please try again and choose from the avaliable options!")
-            elif choice == 4:
+            elif user_choice == 4:
                 # Allowing users to search quotes until the user chooses to return to the 'Menu'.
                 while True:
                     quote_manager.search_quotes()
@@ -64,7 +65,7 @@ def menu():
                         break
                     if option != "Search":
                         print("Invalid input! Please try again and choose from the avaliable options!")
-            elif choice == 5:
+            elif user_choice == 5:
                 # Allowing users to edit categories until the user chooses to return to the 'Menu'.
                 while True:
                     quote_manager.edit_categories()
@@ -73,20 +74,19 @@ def menu():
                         break
                     if option != "Options":
                         print("Invalid input! Please try again and choose from the avaliable options!")
-            elif choice == 6:
+            elif user_choice == 6:
                 # Displaying help information until the user chooses to return to the 'Menu'.
                 while True:
                     quote_manager.display_help()
-                    choice = input("Please enter 'Menu' to return: ").strip().capitalize()
-                    if choice == "Menu":
+                    option = input("Please enter 'Menu' to return: ").strip().capitalize()
+                    if option == "Menu":
                         break
-            elif choice == 7:
+            elif user_choice == 7:
                 # This will EXIT the Mindest Application.
                 print("Thankyou for using Mindset application!")
                 running = False
             else:
-                print(f"{choice} : Invalid Input. Please enter a number from the avliable options.")
-                      
+                print(f"{user_choice} : Invalid Input. Please enter a number from the avliable options.") 
     except Exception as e:
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
