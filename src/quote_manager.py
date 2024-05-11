@@ -1,6 +1,7 @@
 """
-  This module contains main functions that relate to the Motivational Application. It defines functions that allow the user to interact with, 
-  add, remove and search for quotes from a file named 'quote.txt' located in the src directory.
+  This module contains main functions that relate to the Motivational Application. 
+  It defines functions that allow the user to interact with, add, remove and search 
+  for quotes from a file named 'quote.txt' located in the src directory.
 """
 from random import choice
 
@@ -16,7 +17,7 @@ def get_random_quote():
             lines = file.readlines()
            # Using random to generate random quote (line) and saving it into random line variable
             random_line = choice(lines)
-           # printing random quote
+           # Printing random quote
             quote_text, category = random_line.strip().split(" : ")
             print(quote_text)
 
@@ -24,10 +25,15 @@ def get_random_quote():
         print(f"An error occurred while generating random quote: {e}")
         return None
 
+
 def get_quote_from_preference(category):
     """
     Defining function to get a random choice quotes baser on user input (preference).
     Reads quotes from 'src/quote.txt' and prints a random quote from the specified category.
+
+    Args:
+         Category (str): The category of quotes from which to select a 'random' quote. 
+         This parameter sepcifies the user preference for the type of quote.
 
     """
     category = category.strip().capitalize()
@@ -49,6 +55,7 @@ def get_quote_from_preference(category):
     except IOError as e:
         print(f"An error occurred while generating random quote: {e}")
         return None
+    
     
 def get_categories():
     """
@@ -76,10 +83,11 @@ def get_categories():
         for category in user_categories:
             if category in user_categories:
                 print("Quote Categories You Created! : ")
-                print(category)
+                print(category in user_categories)
             
     except (IOError, ValueError) as e:
         print(f"An error occurred while generating a quote: {e}")
+
     
 def display_quote():
     """
@@ -87,7 +95,7 @@ def display_quote():
     and (get_quote_from_preference)
     """
     try:
-        categories = get_categories()
+        get_categories()
         print("Choose an avaliable category to recieve a quote, or we can surprise you!")
         preference = input("Enter 'Category' or 'Surprise' to get a quote:  ").strip().capitalize()
 
@@ -98,6 +106,7 @@ def display_quote():
        
     except Exception as e:
         print(f"An error occurred : {e}")
+
 
 def print_all_from_category():
     """
@@ -124,6 +133,7 @@ def print_all_from_category():
             print(f"No quotes under the category : {category} : ")
     except Exception as e:
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
+
 
 def remove_category():
     """
@@ -153,6 +163,7 @@ def remove_category():
     except Exception as e:
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
+
 def edit_categories():
     """ 
     A function to edit categories of quotes
@@ -180,6 +191,7 @@ def edit_categories():
             print("Invalid option! Make sure to enter an avaliable option 'View' or 'Edit'.")
     except Exception as e:
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
+
 
 def add_my_own_quote():
     """
@@ -214,6 +226,7 @@ def add_my_own_quote():
     except Exception as e:
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
+
 def remove_quote():
     """
     A function to remove a quote from the quote.txt file. 
@@ -237,6 +250,7 @@ def remove_quote():
     except Exception as e:
         print(f"An error occurred while removing quote : {e} Please double check input is correct, and try again!")
 
+
 def edit_quote():
     """
     A function that allows you to edit a quote, either adding or removing. 
@@ -246,11 +260,11 @@ def edit_quote():
     try:
         print("Edit Quote Options")
         print("Would you like to add or remove a quote?")
-        choice = input("Please enter 'Add' or 'Remove' :   ").strip().capitalize()
+        user_choice = input("Please enter 'Add' or 'Remove' :   ").strip().capitalize()
 
-        if choice == "Add":
+        if user_choice == "Add":
             add_my_own_quote()
-        elif choice == "Remove":
+        elif user_choice == "Remove":
             print("Do you know what quote you want to remove?")
             decision = input("Enter 'Yes' or 'No' : ").strip().capitalize()
             if decision == "Yes":
@@ -271,9 +285,10 @@ def edit_quote():
                 else:
                     print("Invalid input! Try again and choose from the avaliable options!")
         else:
-            print(f"{choice} is invlaid. Please try again and choose from the avaliable options!")
+            print(f"{user_choice} is invlaid. Please try again and choose from the avaliable options!")
     except Exception as e:
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
+
 
 def search_quotes():
     """
@@ -309,6 +324,7 @@ def search_quotes():
     except Exception as e:
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
+
 def display_help():
     """
     Displays 'help' information from the help.txt file back to the user. 
@@ -320,6 +336,7 @@ def display_help():
             print(help_text)
     except FileNotFoundError:
         print("Error: Help file not found.")
+
 
 def menu_options():
     """
