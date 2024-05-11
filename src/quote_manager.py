@@ -18,12 +18,14 @@ def get_random_quote():
            # Using random to generate random quote (line) and saving it into random line variable
             random_line = choice(lines)
            # Printing random quote
-            quote_text, category = random_line.strip().split(" : ")
+            quote_text = random_line.strip().split(" : ")
             print(quote_text)
+    # Exception Errors.
+    except (FileNotFoundError, IOError):
+        print("Error occured retrieving a quote from the file.")
+    except Exception as e:
+        print(f"An error occurred while generating random quote from file: {e}")
 
-    except IOError as e:
-        print(f"An error occurred while generating random quote: {e}")
-        return None
 
 
 def get_quote_from_preference(category):
@@ -52,9 +54,10 @@ def get_quote_from_preference(category):
                 print(quote_text)
             else:
                 print("Sorry, that is not an avalaible category! Please check the spelling is correct or enter an avaliable category!")
-    except IOError as e:
-        print(f"An error occurred while generating random quote: {e}")
-        return None
+    except (FileNotFoundError, IOError):
+        print("Error occured retrieving a quote from the file.")
+    except Exception as e:
+        print(f"An error occurred while generating random quote from file: {e}")
     
     
 def get_categories():
@@ -73,37 +76,33 @@ def get_categories():
             if len(seperate) == 2:
                 category = seperate[1].capitalize()
                 if category not in base_categories:
-                    user_categories.add(category)
-            
+                    user_categories.add(category)    
         # Print all 'base' categories and user added categories
         print("Quote Categories :")
         for category in base_categories:
             print(category)
-
         for category in user_categories:
             if category in user_categories:
                 print("Quote Categories You Created! : ")
                 print(category in user_categories)
-            
     except (IOError, ValueError) as e:
         print(f"An error occurred while generating a quote: {e}")
 
     
 def display_quote():
     """
-    Allows the user to choose a category or get a random quote, combined function use of (get_categories) 
-    and (get_quote_from_preference)
+    Allows the user to choose a category or get a random quote, combined function use of 
+    (get_categories) and (get_quote_from_preference)
     """
     try:
         get_categories()
         print("Choose an avaliable category to recieve a quote, or we can surprise you!")
         preference = input("Enter 'Category' or 'Surprise' to get a quote:  ").strip().capitalize()
-
+        # Checking user input to options below.
         if preference == "Surprise" :
             get_random_quote()
         else:
             get_quote_from_preference(preference)
-       
     except Exception as e:
         print(f"An error occurred : {e}")
 
@@ -142,8 +141,8 @@ def remove_category():
     try:
         base_categories = {"Motivation", "Inspiration", "Mindfulness", "Positivity", "Happiness"}
         print("Please note - YOU CAN ONLY REMOVE CATEGORIES YOU HAVE CREATED AND ONCE REMOVED CANNOT BE UNDONE")
-        choice = input("Would you still like to remove a category? 'Yes' or 'No' : ").strip().capitalize()
-        if choice == "Yes":
+        user_choice = input("Would you still like to remove a category? 'Yes' or 'No' : ").strip().capitalize()
+        if user_choice == "Yes":
             get_categories()
             category_choice = input("Please enter a category to be removed : ").strip().capitalize()
             with open("src/quote.txt", "r") as file:
@@ -155,7 +154,7 @@ def remove_category():
                         print(f"The category '{category_choice}' has been removed!")
                 else:
                     print(f"The category '{category_choice}' is a base category and cannot be removed!")
-        elif choice == "No":
+        elif user_choice == "No":
             print("Have a think about it and come back!")
             return
         else:
@@ -171,19 +170,19 @@ def edit_categories():
     try:
         print("You can VIEW existing categories or EDIT 'add/remove' categories!")
         print("Would you like to : VIEW categories? or EDIT categories?")
-        choice = input("Please enter 'View' or 'Edit' : ").strip().capitalize()
-        if choice == "View":
+        user_choice = input("Please enter 'View' or 'Edit' : ").strip().capitalize()
+        if user_choice == "View":
             get_categories()
-        elif choice == "Edit":
+        elif user_choice == "Edit":
             print("Would you like to ADD a new category or REMOVE an existing category?")
-            choice = input("Please enter 'Add' or 'Remove' : ").strip().capitalize()
-            if choice == "Add":
+            user_choice = input("Please enter 'Add' or 'Remove' : ").strip().capitalize()
+            if user_choice == "Add":
                 category = input("Please enter the name of the new category: ").strip().capitalize()
                 quote_text = ("You can do it!").strip()
                 with open("src/quote.txt", "a") as file:
                     file.write(f"\n{quote_text} : {category}\n")
                     print(f"The category '{category}' has been added!")
-            elif choice == "Remove":
+            elif user_choice == "Remove":
                 remove_category()
             else:
                 print("Invalid option! Make sure to enter an avaliable option 'Add' or 'Remove'.")
@@ -318,8 +317,8 @@ def search_quotes():
             else:
                 print("Sorry, we cannot find any quotes matching the keywords you entered!")
             # Allowing the user to search again 
-            choice = input("Would you like to search again? 'Yes' or 'No' : ").strip().capitalize()
-            if choice == "No":
+            user_choice = input("Would you like to search again? 'Yes' or 'No' : ").strip().capitalize()
+            if user_choice == "No":
                 break
     except Exception as e:
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
