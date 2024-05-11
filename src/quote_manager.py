@@ -18,7 +18,7 @@ def get_random_quote():
            # Using random to generate random quote (line) and saving it into random line variable
             random_line = choice(lines)
            # Printing random quote
-            quote_text = random_line.strip().split(" : ")
+            quote_text, category = random_line.strip().split(" : ")
             print(quote_text)
     # Exception Errors.
     except (FileNotFoundError, IOError):

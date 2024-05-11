@@ -35,10 +35,10 @@ def menu():
                 while True:
                     quote_manager.get_random_quote()
                     option = input("Enter 'Menu' to go back or 'Surprise' to get another quote : ").strip().capitalize()
-                    if option == "Menu":
+                    if option not in ["Menu", "Surprise"]:
+                        print("Invalid Option, please enter valid input!")
+                    elif option == "Menu":
                         break
-                    if option != "Surprise":
-                        print("Invalid input! Please try again and choose from the avaliable options!")
             elif choice == 2:
                 # Displaying quotes based on user preference until the user chooses to return to the 'Menu'.
                 while True:
@@ -84,6 +84,8 @@ def menu():
                 # This will EXIT the Mindest Application.
                 print("Thankyou for using Mindset application!")
                 running = False
+            else:
+                print(f"{choice} : Invalid Input. Please enter a number from the avliable options.")
                       
    except Exception as e:
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
