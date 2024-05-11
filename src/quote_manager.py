@@ -66,6 +66,7 @@ def get_quote_from_preference(category):
     """
     category = category.strip().capitalize()
     try:
+        # This code follows the guidelines outlined in PEP8: https://pep8.org/
         with open("src/quote.txt", "r", encoding="utf-8") as file:
             # Opening txt file (quotes.txt) and reading lines (quotes)
             lines = file.readlines()
@@ -84,7 +85,9 @@ def get_quote_from_preference(category):
                 quote_text, category = random_line.strip().split(" : ")
                 print(quote_text)
             else:
-                print("Sorry, that is not an avalaible category! Please check the spelling is correct or enter an avaliable category!")
+                print(
+                    "Sorry, that is not an avalaible category! Please check the spelling is correct or enter an avaliable category!"
+                )
     except (FileNotFoundError, IOError):
         print("Error occured retrieving a quote from the file.")
     except Exception as e:
@@ -115,6 +118,7 @@ def get_categories():
     user_categories = (
         set()
     )  # Creating an empty set to store unique user added categories
+    # This code follows the guidelines outlined in PEP8: https://pep8.org/
     try:
         with open("src/quote.txt", "r", encoding="utf-8") as file:
             lines = file.readlines()
@@ -156,7 +160,9 @@ def display_quote():
     try:
         # Calling the get_categories function to displaty all categories to the user.
         get_categories()
-        print("Choose an avaliable category to recieve a quote, or we can surprise you!")
+        print(
+            "Choose an avaliable category to recieve a quote, or we can surprise you!"
+        )
         preference = (
             input("Enter 'Category' or 'Surprise' to get a quote:  ")
             .strip()
@@ -184,6 +190,7 @@ def print_all_from_category():
         None
     """
     try:
+        # This code follows the guidelines outlined in PEP8: https://pep8.org/
         # Prints all the quote categories avliable
         print("Print all quotes in category")
         get_categories()
@@ -236,7 +243,9 @@ def remove_category():
             "Happiness",
         }
         # Printing a message to the user to warn them that cahnges cannot be undone.
-        print("Please note - YOU CAN ONLY REMOVE CATEGORIES YOU HAVE CREATED AND ONCE REMOVED CANNOT BE UNDONE")
+        print(
+            "Please note - YOU CAN ONLY REMOVE CATEGORIES YOU HAVE CREATED AND ONCE REMOVED CANNOT BE UNDONE"
+        )
         # Allowing the user to input a 'Yes' or 'No', incase they do not want to remove entirely.
         user_choice = (
             input("Would you still like to remove a category? 'Yes' or 'No' : ")
@@ -261,15 +270,21 @@ def remove_category():
                         file.writelines(update_lines)
                         print(f"The category '{category_choice}' has been removed!")
                 else:
-                    print(f"The category '{category_choice}' is a base category and cannot be removed!")
+                    print(
+                        f"The category '{category_choice}' is a base category and cannot be removed!"
+                    )
         # Commencing no removal if chosen by the user.
         elif user_choice == "No":
             print("Have a think about it and come back!")
             return
         else:
-            print("Invalid option! Make sure to enter an avaliable option 'Yes' or 'No'.")
+            print(
+                "Invalid option! Make sure to enter an avaliable option 'Yes' or 'No'."
+            )
     except Exception as e:
-        print(f"An error occurred : {e} Please double check input is correct, and try again!")
+        print(
+            f"An error occurred : {e} Please double check input is correct, and try again!"
+        )
 
 
 def edit_categories():
@@ -285,6 +300,7 @@ def edit_categories():
         None
     """
     try:
+        # This code follows the guidelines outlined in PEP8: https://pep8.org/
         # Printing more information to user.
         print("You can VIEW existing categories or EDIT 'add/remove' categories!")
         print("Would you like to : VIEW categories? or EDIT categories?")
@@ -294,7 +310,9 @@ def edit_categories():
         if user_choice == "View":
             get_categories()
         elif user_choice == "Edit":
-            print("Would you like to ADD a new category or REMOVE an existing category?")
+            print(
+                "Would you like to ADD a new category or REMOVE an existing category?"
+            )
             user_choice = (
                 input("Please enter 'Add' or 'Remove' : ").strip().capitalize()
             )
@@ -311,11 +329,17 @@ def edit_categories():
             elif user_choice == "Remove":
                 remove_category()
             else:
-                print("Invalid option! Make sure to enter an avaliable option 'Add' or 'Remove'.")
+                print(
+                    "Invalid option! Make sure to enter an avaliable option 'Add' or 'Remove'."
+                )
         else:
-            print("Invalid option! Make sure to enter an avaliable option 'View' or 'Edit'.")
+            print(
+                "Invalid option! Make sure to enter an avaliable option 'View' or 'Edit'."
+            )
     except Exception as e:
-        print(f"An error occurred : {e} Please double check input is correct, and try again!")
+        print(
+            f"An error occurred : {e} Please double check input is correct, and try again!"
+        )
 
 
 def add_my_own_quote():
@@ -331,6 +355,7 @@ def add_my_own_quote():
         None
     """
     try:
+        # This code follows the guidelines outlined in PEP8: https://pep8.org/
         print("Create a new quote below!")
         quote_text = input("Enter your quote here: ").strip().capitalize()
         category = input("Enter a category for the quote: ").strip().capitalize()
@@ -362,7 +387,9 @@ def add_my_own_quote():
                 file.write(f"{quote_text} : {category}\n")
                 print("Your quote has been added!")
     except Exception as e:
-        print(f"An error occurred : {e} Please double check input is correct, and try again!")
+        print(
+            f"An error occurred : {e} Please double check input is correct, and try again!"
+        )
 
 
 def remove_quote():
@@ -393,14 +420,18 @@ def remove_quote():
         ]
         # Confirming that the quote has been removed
         if len(lines) == len(filtered_lines):
-            print("Sorry, the entered quote does not exist! Please double check you entered an existing quote!")
+            print(
+                "Sorry, the entered quote does not exist! Please double check you entered an existing quote!"
+            )
         # Remaining quotes back to the text file (quotes.txt)
         else:
             with open("src/quote.txt", "w", encoding="utf-8") as file:
                 file.writelines(filtered_lines)
                 print("Your quote has been removed!")
     except Exception as e:
-        print(f"An error occurred while removing quote : {e} Please double check input is correct, and try again!")
+        print(
+            f"An error occurred while removing quote : {e} Please double check input is correct, and try again!"
+        )
 
 
 def edit_quote():
@@ -433,7 +464,9 @@ def edit_quote():
                 remove_quote()
             elif decision == "No":
                 # Offering the user more relevant information to help them decide.
-                print("Would you like to view all quotes from a category to help you decide?")
+                print(
+                    "Would you like to view all quotes from a category to help you decide?"
+                )
                 decide = input("Enter 'Yes' or 'No' : ").strip().capitalize()
                 if decide == "Yes":
                     print_all_from_category()
@@ -446,11 +479,17 @@ def edit_quote():
                 elif decide == "No":
                     print("Have a think about it and come back!")
                 else:
-                    print("Invalid input! Try again and choose from the avaliable options!")
+                    print(
+                        "Invalid input! Try again and choose from the avaliable options!"
+                    )
         else:
-            print(f"{user_choice} is invlaid. Please try again and choose from the avaliable options!")
+            print(
+                f"{user_choice} is invlaid. Please try again and choose from the avaliable options!"
+            )
     except Exception as e:
-        print(f"An error occurred : {e} Please double check input is correct, and try again!")
+        print(
+            f"An error occurred : {e} Please double check input is correct, and try again!"
+        )
 
 
 def search_quotes():
@@ -468,6 +507,7 @@ def search_quotes():
         None
     """
     try:
+        # This code follows the guidelines outlined in PEP8: https://pep8.org/
         while True:
             print("Search for a quote by entering 'keywords'")
             search_keywords = input("Enter keywords : ").strip().lower().split()
@@ -489,7 +529,9 @@ def search_quotes():
                 for quote in matched_quotes:
                     print(quote)
             else:
-                print("Sorry, we cannot find any quotes matching the keywords you entered!")
+                print(
+                    "Sorry, we cannot find any quotes matching the keywords you entered!"
+                )
             # Allowing the user to search again
             user_choice = (
                 input("Would you like to search again? 'Yes' or 'No' : ")
@@ -499,7 +541,9 @@ def search_quotes():
             if user_choice == "No":
                 break
     except Exception as e:
-        print(f"An error occurred : {e} Please double check input is correct, and try again!")
+        print(
+            f"An error occurred : {e} Please double check input is correct, and try again!"
+        )
 
 
 def display_help():
