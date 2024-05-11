@@ -236,9 +236,7 @@ def remove_category():
             "Happiness",
         }
         # Printing a message to the user to warn them that cahnges cannot be undone.
-        print(
-            "Please note - YOU CAN ONLY REMOVE CATEGORIES YOU HAVE CREATED AND ONCE REMOVED CANNOT BE UNDONE"
-        )
+        print("Please note - YOU CAN ONLY REMOVE CATEGORIES YOU HAVE CREATED AND ONCE REMOVED CANNOT BE UNDONE")
         # Allowing the user to input a 'Yes' or 'No', incase they do not want to remove entirely.
         user_choice = (
             input("Would you still like to remove a category? 'Yes' or 'No' : ")
@@ -263,9 +261,7 @@ def remove_category():
                         file.writelines(update_lines)
                         print(f"The category '{category_choice}' has been removed!")
                 else:
-                    print(
-                        f"The category '{category_choice}' is a base category and cannot be removed!"
-                    )
+                    print(f"The category '{category_choice}' is a base category and cannot be removed!")
         # Commencing no removal if chosen by the user.
         elif user_choice == "No":
             print("Have a think about it and come back!")
@@ -298,9 +294,7 @@ def edit_categories():
         if user_choice == "View":
             get_categories()
         elif user_choice == "Edit":
-            print(
-                "Would you like to ADD a new category or REMOVE an existing category?"
-            )
+            print("Would you like to ADD a new category or REMOVE an existing category?")
             user_choice = (
                 input("Please enter 'Add' or 'Remove' : ").strip().capitalize()
             )
