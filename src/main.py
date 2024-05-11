@@ -8,7 +8,7 @@
 import quote_manager
 
 def menu():
-   """
+    """
     Main Menu for the Mindset Application.
 
     This function allows users to interact with different features of the application, including generating random quotes,
@@ -23,8 +23,8 @@ def menu():
     Raises:
         Exception: If an error occurs during the execution of the menu options.
     """
-   running = True
-   try: 
+    running = True
+    try: 
         while running:
             # Display the 'Menu' options.
             quote_manager.menu_options()
@@ -87,7 +87,7 @@ def menu():
             else:
                 print(f"{choice} : Invalid Input. Please enter a number from the avliable options.")
                       
-   except Exception as e:
+    except Exception as e:
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
 menu()
