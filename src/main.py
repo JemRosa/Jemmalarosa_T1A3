@@ -12,11 +12,13 @@ def menu():
     """
     Main Menu for the Mindset Application.
 
-    This function allows users to interact with different features of the application, including generating random quotes,
-    managing quotes and categories, adding their own quotes, and searching quotes.
+    This function allows users to interact with different features of the application, 
+    including generating random quotes, managing quotes and categories, 
+    adding their own quotes, and searching quotes.
 
-    Users are presented with a numbered menu and prompted to choose an option. Depending on the chosen option, 
-    the user will be guided through various functionalities of the application until they decide to exit.
+    Users are presented with a numbered menu and prompted to choose an option. 
+    Depending on the chosen option, the user will be guided through various functionalities of 
+    the application until they decide to exit.
 
     Returns:
         None
