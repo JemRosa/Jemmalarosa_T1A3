@@ -1,5 +1,5 @@
 """
-  This module contains main functions that relate to the Moticational Application. It defines functions that allow the user to interact with, 
+  This module contains main functions that relate to the Motivational Application. It defines functions that allow the user to interact with, 
   add, remove and search for quotes from a file named 'quote.txt' located in the src directory.
 """
 from random import choice
@@ -7,7 +7,8 @@ from random import choice
 # Defining method to generate random quote
 def get_random_quote():
     """
-    Defining function to generate random quote
+    Defining function to generate random quote.
+    Reads quotes from 'src/quote.txt' and prints a random quote.
     """
     try:
         with open("src/quote.txt", "r") as file:
@@ -24,6 +25,11 @@ def get_random_quote():
         return None
 
 def get_quote_from_preference(category):
+    """
+    Defining function to get a random choice quotes baser on user input (preference).
+    Reads quotes from 'src/quote.txt' and prints a random quote from the specified category.
+
+    """
     category = category.strip().capitalize()
     try:
         with open("src/quote.txt", "r") as file:
@@ -44,71 +50,6 @@ def get_quote_from_preference(category):
         print(f"An error occurred while generating random quote: {e}")
         return None
     
-def display_quote():
-    try:
-        categories = get_categories()
-        print("Choose an avaliable category to recieve a quote, or we can surprise you!")
-        preference = input("Enter 'Category' or 'Surprise' to get a quote:  ").strip().capitalize()
-
-        if preference == "Surprise" :
-            get_random_quote()
-        else:
-            get_quote_from_preference(preference)
-       
-    except Exception as e:
-        print(f"An error occurred : {e}")
-
-def print_all_from_category():
-    try:
-        # Prints all the quote categories avliable
-        print("Print all quotes in category")
-        get_categories()
-        # Prompt for user to input a category
-        category = input("Please enter a category to display all quotes: ").strip().capitalize()
-        # Open the txt file (quotes.txt) in read mode to read all existing lines (quotes)
-        with open("src/quote.txt", "r") as file:
-            lines = file.readlines()
-        # Searching quotes line by line to the specified category
-        category_quotes = [line.strip() for line in lines if line.strip().endswith(f" : {category}")]
-        # Printing all the quotes under the specified category
-        if category_quotes:
-            print(f"All quotes under the category : {category} : ")
-            for quote in category_quotes:
-                print(quote.split(" : ")[0])
-        # Message to catch an error of invalid category
-        else:
-            print(f"No quotes under the category : {category} : ")
-    except Exception as e:
-        print(f"An error occurred : {e} Please double check input is correct, and try again!")
-
-def remove_category():
-    """
-    A function to remove categories only created by user
-    """
-    try:
-        base_categories = {"Motivation", "Inspiration", "Mindfulness", "Positivity", "Happiness"}
-        print("Please note - YOU CAN ONLY REMOVE CATEGORIES YOU HAVE CREATED AND ONCE REMOVED CANNOT BE UNDONE")
-        choice = input("Would you still like to remove a category? 'Yes' or 'No' : ").strip().capitalize()
-        if choice == "Yes":
-            get_categories()
-            category_choice = input("Please enter a category to be removed : ").strip().capitalize()
-            with open("src/quote.txt", "r") as file:
-                lines = file.readlines()
-                if category_choice.capitalize() not in base_categories:
-                    update_lines = [line for line in lines if not line.strip().endswith(f": {category_choice}")]
-                    with open("src/quote.txt", "w") as file:
-                        file.writelines(update_lines)
-                        print(f"The category '{category_choice}' has been removed!")
-                else:
-                    print(f"The category '{category_choice}' is a base category and cannot be removed!")
-        elif choice == "No":
-            print("Have a think about it and come back!")
-            return
-        else:
-            print("Invalid option! Make sure to enter an avaliable option 'Yes' or 'No'.")
-    except Exception as e:
-        print(f"An error occurred : {e} Please double check input is correct, and try again!")
-
 def get_categories():
     """
     Defining function to output the unqiue subject categories from the quote.txt file to the user while distinguishing between
@@ -140,9 +81,81 @@ def get_categories():
     except (IOError, ValueError) as e:
         print(f"An error occurred while generating a quote: {e}")
     
+def display_quote():
+    """
+    Allows the user to choose a category or get a random quote, combined function use of (get_categories) 
+    and (get_quote_from_preference)
+    """
+    try:
+        categories = get_categories()
+        print("Choose an avaliable category to recieve a quote, or we can surprise you!")
+        preference = input("Enter 'Category' or 'Surprise' to get a quote:  ").strip().capitalize()
+
+        if preference == "Surprise" :
+            get_random_quote()
+        else:
+            get_quote_from_preference(preference)
+       
+    except Exception as e:
+        print(f"An error occurred : {e}")
+
+def print_all_from_category():
+    """
+    Prints all quotes under a specified category.
+    """
+    try:
+        # Prints all the quote categories avliable
+        print("Print all quotes in category")
+        get_categories()
+        # Prompt for user to input a category
+        category = input("Please enter a category to display all quotes: ").strip().capitalize()
+        # Open the txt file (quotes.txt) in read mode to read all existing lines (quotes)
+        with open("src/quote.txt", "r") as file:
+            lines = file.readlines()
+        # Searching quotes line by line to the specified category
+        category_quotes = [line.strip() for line in lines if line.strip().endswith(f" : {category}")]
+        # Printing all the quotes under the specified category
+        if category_quotes:
+            print(f"All quotes under the category : {category} : ")
+            for quote in category_quotes:
+                print(quote.split(" : ")[0])
+        # Message to catch an error of invalid category
+        else:
+            print(f"No quotes under the category : {category} : ")
+    except Exception as e:
+        print(f"An error occurred : {e} Please double check input is correct, and try again!")
+
+def remove_category():
+    """
+    A function to remove categories only created by the user.
+    """
+    try:
+        base_categories = {"Motivation", "Inspiration", "Mindfulness", "Positivity", "Happiness"}
+        print("Please note - YOU CAN ONLY REMOVE CATEGORIES YOU HAVE CREATED AND ONCE REMOVED CANNOT BE UNDONE")
+        choice = input("Would you still like to remove a category? 'Yes' or 'No' : ").strip().capitalize()
+        if choice == "Yes":
+            get_categories()
+            category_choice = input("Please enter a category to be removed : ").strip().capitalize()
+            with open("src/quote.txt", "r") as file:
+                lines = file.readlines()
+                if category_choice.capitalize() not in base_categories:
+                    update_lines = [line for line in lines if not line.strip().endswith(f": {category_choice}")]
+                    with open("src/quote.txt", "w") as file:
+                        file.writelines(update_lines)
+                        print(f"The category '{category_choice}' has been removed!")
+                else:
+                    print(f"The category '{category_choice}' is a base category and cannot be removed!")
+        elif choice == "No":
+            print("Have a think about it and come back!")
+            return
+        else:
+            print("Invalid option! Make sure to enter an avaliable option 'Yes' or 'No'.")
+    except Exception as e:
+        print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
 def edit_categories():
-    """ a function to edit categories of quotes
+    """ 
+    A function to edit categories of quotes
     """
     try:
         print("You can VIEW existing categories or EDIT 'add/remove' categories!")
@@ -169,7 +182,9 @@ def edit_categories():
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
 def add_my_own_quote():
-    """_summary_
+    """
+    A function that allows users to create thier own quotes and add them into the quote.txt file.
+    If the category is not already created user is prmpoted to create a new category or exit. 
     """
     try:
         print("Create a new quote below!")
@@ -200,6 +215,9 @@ def add_my_own_quote():
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
 def remove_quote():
+    """
+    A function to remove a quote from the quote.txt file. 
+    """
     try:
         # Ask the user input the quote they want to remove
         quote_text = input("Enter the quote you would like to remove:  ").strip().capitalize()
@@ -220,6 +238,11 @@ def remove_quote():
         print(f"An error occurred while removing quote : {e} Please double check input is correct, and try again!")
 
 def edit_quote():
+    """
+    A function that allows you to edit a quote, either adding or removing. 
+    It incorperated other functions (add_my_own_quote), (remove_quote) and (print_all_from_category).
+    Allowing dynamic edditing options and choice to the user. 
+    """
     try:
         print("Edit Quote Options")
         print("Would you like to add or remove a quote?")
@@ -253,6 +276,11 @@ def edit_quote():
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
 def search_quotes():
+    """
+    A function that allows the user to input 'keywords', can be serveral or one. The keywords are
+    matched to quotes in the quote.txt file and displayed back to the user. 
+    The function will loop until the user decides to exit.
+    """
     try:
         while True:
             print("Search for a quote by entering 'keywords'")
@@ -282,6 +310,10 @@ def search_quotes():
         print(f"An error occurred : {e} Please double check input is correct, and try again!")
 
 def display_help():
+    """
+    Displays 'help' information from the help.txt file back to the user. 
+    Providing some more information about the Mindset application the the user and also more inforamtion about each feature. 
+    """
     try:
         with open("src/help.txt", "r") as file:
             help_text = file.read()
@@ -290,11 +322,15 @@ def display_help():
         print("Error: Help file not found.")
 
 def menu_options():
-     print("Welcome to the Mindest Application")
-     print("1. Surprise me with a random quote")
-     print("2. Boost your mood, get a quote based on your need!")
-     print("3. Quote Options (Create or Remove Quotes)")
-     print("4. Search Quotes")
-     print("5. Category Options (View all, Create or Remove)")
-     print("6. Help")
-     print("7. Exit")
+    """
+    A function that solely prints the 'Menu' options to the user. 
+    Added to reduce the code on the (main.py) moddule.
+    """
+    print("Welcome to the Mindest Application")
+    print("1. Surprise me with a random quote")
+    print("2. Boost your mood, get a quote based on your need!")
+    print("3. Quote Options (Create or Remove Quotes)")
+    print("4. Search Quotes")
+    print("5. Category Options (View all, Create or Remove)")
+    print("6. Help")
+    print("7. Exit")
