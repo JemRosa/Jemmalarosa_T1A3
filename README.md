@@ -130,7 +130,11 @@ PEP8 provides guidelines for writing clean, readable, and maintainable Python co
 Source Control Repository
 <git@github.com>:JemRosa/Jemmalarosa_T1A3.git
 
+Implementation Plan
+Please see attached PDF file in docs folder. <Jemmalarosa_T1A3/docs/Implementation Plan for Mindset Application.pdf>
+
 Installation
+Please also see more installation information in <Jemmalarosa_T1A3/docs/help.md>
 
 1. Clone the repository to your local machine
 git clone <git@github.com>:JemRosa/Jemmalarosa_T1A3.git
@@ -144,11 +148,27 @@ pip install -r requirements.txt
 4. Run the application:
 python main.py
 
+
+For Windows Users:
+Setup Script: Navigate to the extracted folder and double-click on setup_project.bat. This script creates a virtual environment and installs all necessary dependencies.
+
+For macOS/Linux Users:
+Setup Script: Open a terminal, navigate to the extracted folder, make the script executable with chmod +x setup_project.sh, and execute it by typing ./setup_project.sh.
+
+Starting the Application:
+Windows: Activate the virtual environment with myenv\Scripts\activate then start the application with python app.py.
+macOS/Linux: Activate the virtual environment with source myenv/bin/activate then start the application with python app.py.
+
+Dependencies:
+Python 3.x
+The application requires Python 3.x. It utilizes built-in Python modules,specifically 'random', hence no additional packages are necessary. Ensure Python 3.x is installed on your system.
+You can download it from the official Python website: <https://www.python.org/downloads/>
+
 Using Mindset Terminal Application
 Upon running the application, you will be presented with a main menu where you can choose various options to interact with the application's features. Simply follow the prompts to navigate through the menu and utilize the desired functionalities.
+More information reagarding application use is avaliable in -  <Jemmalarosa_T1A3/docs/help.md>
 
 ## Project Setup Scripts
-
 This project includes two scripts to automate the setup process:
 
 - **setup_application.bash** for Unix-based systems (macOS, Linux)
@@ -158,3 +178,4 @@ This project includes two scripts to automate the setup process:
   - Similar to the Unix script, it sets up and activates a virtual environment and installs necessary dependencies.
 
 To use these scripts, run the appropriate one for your operating system after cloning the project repository.
+Breief instructions are avaliable above, or further information and instructions are avaliable in <Jemmalarosa_T1A3/docs/help.md>.
