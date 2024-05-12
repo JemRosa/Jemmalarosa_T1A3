@@ -123,9 +123,12 @@ Variables and Scope: running and user_choice are used within the function.
 Loops and Conditional Control Structures: Uses a while loop to keep the application running and conditionals to execute different functionalities based on user choices.
 Error Handling: Includes error handling for any exceptions during menu option execution.
 
-References
+Resources and Style Guide
 The application will adhere to the PEP8 (Python Enhancement Proposal 8) code style guide for Python projects.
 PEP8 provides guidelines for writing clean, readable, and maintainable Python code.in PEP8: <https://pep8.org/>
+
+Source Control Repository
+<git@github.com>:JemRosa/Jemmalarosa_T1A3.git
 
 Installation
 
@@ -143,3 +146,15 @@ python main.py
 
 Using Mindset Terminal Application
 Upon running the application, you will be presented with a main menu where you can choose various options to interact with the application's features. Simply follow the prompts to navigate through the menu and utilize the desired functionalities.
+
+## Project Setup Scripts
+
+This project includes two scripts to automate the setup process:
+
+- **setup_application.bash** for Unix-based systems (macOS, Linux)
+  - This script creates a Python virtual environment, activates it, and installs all required dependencies from the `requirements.txt` file.
+
+- **setup_application.bat** for Windows
+  - Similar to the Unix script, it sets up and activates a virtual environment and installs necessary dependencies.
+
+To use these scripts, run the appropriate one for your operating system after cloning the project repository.
